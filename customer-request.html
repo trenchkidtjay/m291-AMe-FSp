@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kundenanfrage erfassen</title>
+    <link rel="stylesheet" href="/Styles/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Schnell Menü -->
+        <nav class="main-menu">
+            <a href="index.html">Projekt erfassen</a>
+            <a href="projekt-bearbeiten.html">Projekt bearbeiten</a>
+            <a href="kunden-anfrage.html">Kundenanfrage erfassen</a>
+        </nav>
+
+        <!-- Hamburger Liste -->
+        <div class="hamburger-menu" id="menu">
+            <button @click="zeigeProjektListe = !zeigeProjektListe">☰</button>
+            <div v-if="zeigeProjektListe" class="projekt-uebersicht">
+                <h2>Projekte</h2>
+                <ul v-if="projekte.length > 0">
+                    <li v-for="(projekt, index) in projekte" :key="index">{{ projekt.name }}</li>
+                </ul>
+                <p v-else>Keine Projekte vorhanden.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Kundenanfrage erfassen</h1>
+            <form @submit.prevent="anfrageHinzufuegen">
+                <label for="anfrageTyp">Kundenanfrage Typ:</label>
+                <select v-model="neueAnfrage.typ">
+                    <option value="quickService">Quick Service</option>
+                    <option value="auftragOhneOfferte">Auftrag ohne Offerte</option>
+                    <option value="auftragMitOfferte">Auftrag mit Offerte</option>
+                </select>
+
+                <label for="anfrageBeschreibung">Beschreibung:</label>
+                <textarea v-model="neueAnfrage.beschreibung" required></textarea>
+
+                <button type="submit">Anfrage erfassen</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/JS/customer-request.js"></script>
+    
+</body>
+</html>
