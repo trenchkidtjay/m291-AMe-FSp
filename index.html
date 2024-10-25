@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt erfassen</title>
+    <link rel="stylesheet" href="/Styles/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Schnell Menü-->
+        <nav class="main-menu">
+            <a href="index.html">Projekt erfassen</a>
+            <a href="projekt-bearbeiten.html">Projekt bearbeiten</a>
+            <a href="kunden-anfrage.html">Kundenanfrage erfassen</a>
+        </nav>
+
+        <!-- Hamburger Liste -->
+        <div class="hamburger-menu">
+            <button @click="zeigeProjektListe = !zeigeProjektListe">☰</button>
+            <div v-if="zeigeProjektListe" class="projekt-uebersicht">
+                <h2>Projekte</h2>
+                <ul v-if="projekte.length > 0">
+                    <li v-for="(projekt, index) in projekte" :key="index">{{ projekt.name }}</li>
+                </ul>
+                <p v-else>Keine Projekte vorhanden.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <h1>Neues Projekt erfassen</h1>
+            <form @submit.prevent="projektHinzufuegen">
+                <label for="projektName">Projektname:</label>
+                <input type="text" v-model="neuesProjekt.name" required>
+
+                <label for="projektBeschreibung">Beschreibung:</label>
+                <textarea v-model="neuesProjekt.beschreibung" required></textarea>
+
+                <label for="dokumentTyp">Dokument zuweisen:</label>
+                <select v-model="neuesProjekt.dokument">
+                    <option value="offerte">Offerte</option>
+                    <option value="brief">Brief</option>
+                    <option value="manual">Manual</option>
+                </select>
+
+                <button type="submit">Projekt hinzufügen</button>
+            </form>
+
+            <h2 v-if="nachricht">{{ nachricht }}</h2>
+        </div>
+    </div>
+
+    <script src="/JS/app.js" defer></script>
+</body>
+</html>

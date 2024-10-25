@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekt bearbeiten</title>
+    <link rel="stylesheet" href="/Styles/style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Schnell Menü -->
+        <nav class="main-menu">
+            <a href="index.html">Projekt erfassen</a>
+            <a href="projekt-bearbeiten.html">Projekt bearbeiten</a>
+            <a href="kunden-anfrage.html">Kundenanfrage erfassen</a>
+        </nav>
+
+        <!-- Hamburger Liste -->
+        <div class="hamburger-menu" id="menu">
+            <button @click="zeigeProjektListe = !zeigeProjektListe">☰</button>
+            <div v-if="zeigeProjektListe" class="projekt-uebersicht">
+                <h2>Projekte</h2>
+                <ul v-if="projekte.length > 0">
+                    <li v-for="(projekt, index) in projekte" :key="index">{{ projekt.name }}</li>
+                </ul>
+                <p v-else>Keine Projekte vorhanden.</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <h1>Projekt bearbeiten</h1>
+            <form @submit.prevent="projektAktualisieren">
+                <label for="projektAuswahl">Wähle ein Projekt:</label>
+                <select v-model="aktuellesProjektIndex">
+                    <option v-for="(projekt, index) in projekte" :value="index">{{ projekt.name }}</option>
+                </select>
+
+                <label for="updateBeschreibung">Neue Beschreibung:</label>
+                <textarea v-model="projekte[aktuellesProjektIndex].beschreibung"></textarea>
+
+                <label for="updateDokument">Dokument zuweisen:</label>
+                <select v-model="projekte[aktuellesProjektIndex].dokument">
+                    <option value="offerte">Offerte</option>
+                    <option value="brief">Brief</option>
+                    <option value="manual">Manual</option>
+                </select>
+
+                <button type="submit">Aktualisieren</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/projekt-bearbeiten.js"></script>
+    <script src="/JS/app.js"></script>
+</body>
+</html>
