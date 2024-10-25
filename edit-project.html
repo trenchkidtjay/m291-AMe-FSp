@@ -14,21 +14,9 @@
         <!-- Schnell Menü -->
         <nav class="main-menu">
             <a href="index.html">Projekt erfassen</a>
-            <a href="/edit-project.html">Projekt bearbeiten</a>
-            <a href="/customer-request.html">Kundenanfrage erfassen</a>
+            <a href="edit-project.html">Projekt bearbeiten</a>
+            <a href="customer-request.html">Kundenanfrage erfassen</a>
         </nav>
-
-        <!-- Hamburger Liste -->
-        <div class="hamburger-menu">
-            <button @click="zeigeProjektListe = !zeigeProjektListe">☰</button>
-            <div v-if="zeigeProjektListe" class="projekt-uebersicht">
-                <h2>Projekte</h2>
-                <ul v-if="projekte.length > 0">
-                    <li v-for="(projekt, index) in projekte" :key="index">{{ projekt.name }}</li>
-                </ul>
-                <p v-else>Keine Projekte vorhanden.</p>
-            </div>
-        </div>
 
         <div class="container">
             <h1>Projekt bearbeiten</h1>
