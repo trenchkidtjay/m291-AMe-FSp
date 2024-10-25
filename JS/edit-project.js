@@ -14,5 +14,5 @@ Vue.createApp({
             alert('Projekt erfolgreich aktualisiert!');
         }
     }
-    
+
 }).mount('#app');
